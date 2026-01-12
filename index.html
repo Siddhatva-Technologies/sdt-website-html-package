@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rapid Application Development Framework</title>
+      <!-- Removed misplaced section tag that caused 'Framework' to appear at the top -->
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(135deg, #080e1e 0%, #0a2233 100%);
+        color: #e2e5e8;
+        font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+        font-size: 1.08rem;
+        letter-spacing: 0.01em;
+        position: relative;
+      }
+      /* --- Services Section Styles --- */
+      .solutions-section {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 64px;
+        background: transparent;
+        padding: 64px 0 64px 0;
+      }
+      .solutions-left {
+        max-width: 480px;
+        margin-left: 32px;
+      }
+      .solutions-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #e2e5e8;
+        margin-bottom: 18px;
+      }
+      .solutions-title .blue {
+        color: #00bbff;
+      }
+      .solutions-desc {
+        color: #bfc9db;
+        font-size: 1.1rem;
+        margin-bottom: 24px;
+      }
+      .solutions-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 32px 0;
+      }
+      .solutions-list li {
+        font-size: 1.08rem;
+        color: #e2e5e8;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+      }
+      .solutions-list .check {
+        color: #00bbff;
+        font-size: 1.2rem;
+        margin-right: 10px;
+      }
+      .solutions-btn {
+        background: #00bbff;
+        color: #e2e5e8;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 32px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .solutions-btn:hover {
+        background: #0a8ecf;
+      }
+      .solutions-right {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        min-width: 400px;
+        max-width: 600px;
+      }
+      .compare-card {
+        background: #181f2a;
+        border-radius: 16px;
+        padding: 32px 36px 28px 36px;
+        box-shadow: 0 2px 24px 0 rgba(0, 0, 0, 0.1);
+        margin-bottom: 0;
+      }
+      .compare-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #e2e5e8;
+        margin-bottom: 12px;
+      }
+      .compare-bar {
+        width: 100%;
+        height: 8px;
+        border-radius: 4px;
+        background: #232b3a;
+        margin-bottom: 10px;
+        position: relative;
+      }
+      .compare-bar-inner {
+        height: 100%;
+        border-radius: 4px;
+        background: #4a5568;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      .compare-bar-inner.rad {
+        background: #00bbff;
+      }
+      .compare-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.98rem;
+        color: #bfc9db;
+        margin-top: 2px;
+      }
+      .compare-labels strong {
+        color: #e2e5e8;
+      }
+      .compare-card.rad {
+        border: 1.5px solid #00bbff;
+        box-shadow: 0 0 24px 0 #00bbff22;
+      }
+      @media (max-width: 1100px) {
+        .solutions-section {
+          flex-direction: column;
+          align-items: center;
+          gap: 32px;
+        }
+        .solutions-left {
+          margin-left: 0;
+          text-align: center;
+        }
+        .solutions-right {
+          min-width: 0;
+          max-width: 100vw;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .navbar {
+          flex-direction: column;
+          gap: 10px;
+          padding: 12px 8px 0 8px;
+        }
+        .navbar-menu {
+          gap: 16px;
+        }
+        .main-title {
+          font-size: 2.1rem;
+        }
+        .features {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+        .feature {
+          min-width: 0;
+          width: 90vw;
+          padding: 16px 8px;
+        }
+        .main-content {
+          padding-top: 110px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .navbar {
+          flex-direction: column;
+          gap: 10px;
+          padding: 8px 2vw 0 2vw;
+        }
+        .navbar img {
+          height: 38px;
+        }
+        .navbar-menu {
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .navbar-menu a {
+          font-size: 0.98rem;
+          padding: 5px 8px;
+        }
+        .main-title {
+          font-size: 1.3rem;
+        }
+        .badge {
+          font-size: 0.98rem;
+          padding: 6px 12px;
+        }
+        .main-content {
+          padding-top: 80px;
+        }
+        .features {
+          gap: 12px;
+        }
+        .feature {
+          min-width: 0;
+          width: 98vw;
+          padding: 10px 2vw;
+        }
+        .main-actions {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .main-actions .primary, .main-actions .secondary {
+          width: 100%;
+          padding: 12px 0;
+          font-size: 1rem;
+        }
+        .ai-assistant-btn {
+          right: 12px;
+          bottom: 12px;
+          width: 48px;
+          height: 48px;
+          font-size: 1.3rem;
+        }
+        .footer {
+          font-size: 0.98rem !important;
+          padding: 24px 0 0px 0 !important;
+        }
+      }
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 40px 0 40px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(90deg, #080e1e 60%, #0a2233 100%);
+        z-index: 1001;
+        box-shadow: 0 2px 24px 0 #00bbff22;
+        border-bottom: 1.5px solid #00bbff44;
+        transition: box-shadow 0.2s, border 0.2s;
+        backdrop-filter: blur(8px) saturate(120%);
+        -webkit-backdrop-filter: blur(8px) saturate(120%);
+      }
+      .navbar img {
+        height: 54px;
+        transition: filter 0.2s;
+        filter: drop-shadow(0 2px 8px #000a1a44);
+      }
+      .navbar-menu {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+      .navbar-menu a {
+        color: #b6eaff;
+        text-decoration: none;
+        font-size: 1.08rem;
+        font-weight: 500;
+        padding: 6px 14px;
+        border-radius: 6px;
+        transition: color 0.2s, background 0.2s;
+      }
+      .navbar-menu a:hover, .navbar-menu a.active {
+        color: #fff;
+        background: linear-gradient(90deg, #00bbff33 0%, #0a2233 100%);
+      }
+      .navbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .navbar-actions .get-started {
+        background: #00bbff;
+        color: #e2e5e8;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .navbar-actions .get-started:hover {
+        background: #0a8ecf;
+      }
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+        text-align: center;
+        padding-top: 90px;
+        padding-bottom: 32px;
+        position: relative;
+        z-index: 1;
+      }
+      .badge {
+        display: inline-block;
+        background: linear-gradient(90deg, #12203a 60%, #00bbff22 100%);
+        color: #00bbff;
+        border-radius: 20px;
+        padding: 8px 22px;
+        font-size: 1.08rem;
+        font-weight: 600;
+        margin-bottom: 36px;
+        margin-top: 56px;
+        letter-spacing: 0.03em;
+        box-shadow: 0 2px 16px 0 #00bbff33, 0 4px 32px 0 #00bbff11;
+        backdrop-filter: blur(2px) saturate(120%);
+        -webkit-backdrop-filter: blur(2px) saturate(120%);
+        border: 1.5px solid #00bbff33;
+      }
+      .main-title {
+        font-size: 3.2rem;
+        font-weight: 900;
+        margin: 0 0 18px 0;
+        color: #e2e5e8;
+        line-height: 1.1;
+        letter-spacing: 0.01em;
+        text-shadow: 0 2px 8px #00bbff22, 0 8px 32px #00bbff11;
+        filter: drop-shadow(0 0 8px #00bbff33);
+      }
+      .main-title .highlight {
+        color: #00bbff;
+        letter-spacing: 0.01em;
+        text-shadow: 0 2px 16px #00bbff88, 0 8px 32px #00bbff22;
+        filter: drop-shadow(0 0 8px #00bbff88);
+      }
+      .subtitle {
+        margin: 18px 0 0 0;
+        font-size: 1.13rem;
+        color: #bfc9db;
+        font-weight: 400;
+        max-width: 600px;
+        line-height: 1.6;
+      }
+      .main-actions {
+        margin: 38px 0 0 0;
+        display: flex;
+        gap: 22px;
+        justify-content: center;
+      }
+      .main-actions .primary {
+        background: linear-gradient(90deg, #00bbff 60%, #0a2233 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 15px 30px;
+        font-weight: 700;
+        font-size: 1.08rem;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 16px 0 #00bbff44, 0 4px 32px 0 #00bbff11;
+        position: relative;
+        overflow: hidden;
+      }
+      .main-actions .primary::after {
+        content: '';
+        position: absolute;
+        left: 0; top: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at 80% 20%, #00bbff44 0%, transparent 70%);
+        opacity: 0.7;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .main-actions .primary:hover {
+        background: linear-gradient(90deg, #0a8ecf 60%, #00bbff 100%);
+        box-shadow: 0 4px 32px 0 #00bbff66;
+      }
+      .main-actions .secondary {
+        background: linear-gradient(90deg, #181f2a 60%, #0a2233 100%);
+        color: #b6eaff;
+        border: none;
+        border-radius: 8px;
+        padding: 15px 30px;
+        font-weight: 700;
+        font-size: 1.08rem;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px 0 #00bbff11;
+        position: relative;
+        overflow: hidden;
+      }
+      .main-actions .secondary::after {
+        content: '';
+        position: absolute;
+        left: 0; top: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at 20% 80%, #00bbff22 0%, transparent 70%);
+        opacity: 0.7;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .main-actions .secondary:hover {
+        background: linear-gradient(90deg, #232b3a 60%, #181f2a 100%);
+        box-shadow: 0 4px 32px 0 #00bbff33;
+        color: #fff;
+      }
+            /* AI Assistant Floating Button */
+            .ai-assistant-btn {
+              position: fixed;
+              right: 32px;
+              bottom: 32px;
+              z-index: 2000;
+              background: linear-gradient(135deg, #00bbff 60%, #0a2233 100%);
+              color: #fff;
+              border: none;
+              border-radius: 50%;
+              width: 64px;
+              height: 64px;
+              box-shadow: 0 4px 32px 0 #00bbff55, 0 2px 8px 0 #00bbff22;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 2.2rem;
+              cursor: pointer;
+              transition: box-shadow 0.2s, background 0.2s;
+              outline: none;
+              border: 2px solid #00bbff88;
+              animation: ai-glow 2.5s infinite alternate;
+            }
+            .ai-assistant-btn:hover {
+              box-shadow: 0 8px 48px 0 #00bbff99, 0 2px 8px 0 #00bbff44;
+              background: linear-gradient(135deg, #0a2233 60%, #00bbff 100%);
+            }
+            @keyframes ai-glow {
+              0% { box-shadow: 0 4px 32px 0 #00bbff55, 0 2px 8px 0 #00bbff22; }
+              100% { box-shadow: 0 8px 64px 0 #00bbff99, 0 2px 8px 0 #00bbff44; }
+            }
+      .features {
+        margin: 64px auto 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        max-width: 900px;
+      }
+      .feature {
+        background: #181f2a;
+        border-radius: 16px;
+        padding: 24px 32px;
+        color: #bfc9db;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        min-width: 220px;
+      }
+      .feature .icon {
+        font-size: 1.3rem;
+        color: #00bbff;
+        background: #0a2233;
+        border-radius: 8px;
+        padding: 12px 16px;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      @media (max-width: 900px) {
+        .features {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+      }
+      @media (max-width: 600px) {
+        .navbar {
+          flex-direction: column;
+          gap: 16px;
+          padding: 16px 8px 0 8px;
+        }
+        .main-title {
+          font-size: 2.2rem;
+        }
+        .features {
+          gap: 12px;
+        }
+        .feature {
+          min-width: 0;
+          width: 90vw;
+          padding: 16px 8px;
+        }
+      }
+        .impact-card {
+          border: 1.5px solid #202735;
+        }
+      .tech-icon {
+        background: #0a2233;
+        color: #00bbff;
+        font-size: 2rem;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        margin-bottom: 8px;
+        padding: 12px 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" style="display: flex; align-items: center; justify-content: space-between; padding: 24px 48px 0 48px; position: fixed; top: 0; left: 0; width: 100%; background: #080e1e; z-index: 1001; box-shadow: 0 2px 16px 0 #000a1a22; border-bottom: 1.5px solid #bfc9db;">
+      <div style="display: flex; align-items: center; gap: 32px;">
+        <a href="#top" id="logo-link"><img src="white1-logo.png" alt="Logo" style="cursor:pointer;" /></a>
+        <div class="navbar-menu">
+          <a href="#framework">Framework</a>
+          <a href="#services">Services</a>
+          <a href="#case-studies">Case Studies</a>
+        </div>
+      </div>
+      <div class="navbar-actions">
+        <!-- No actions -->
+      </div>
+    </nav>
+    <main class="main-content">
+      <div class="badge">⚡ Rapid Application Development Framework</div>
+      <h1 class="main-title">
+        Build 50% Faster.<br />
+        <span class="highlight">Deliver 100% Better.</span>
+      </h1>
+      <div class="subtitle">
+        We don't sell the framework — we deliver your vision using our
+        proprietary RAD engine. Enterprise-grade security, AI-powered
+        automation, and built-in CI/CD.
+      </div>
+      <div class="main-actions">
+        <button class="primary" id="start-project-btn">Start Your Project &rarr;</button>
+        <button class="secondary" id="view-case-studies-btn">View Case Studies</button>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <span class="icon">&lt;/&gt;</span> Next.js &amp; React Core
+        </div>
+        <div class="feature">
+          <span class="icon">&#128274;</span> Enterprise Security
+        </div>
+        <div class="feature">
+          <span class="icon">&#9889;</span> Built-in CI/CD
+        </div>
+      </div>
+    </main>
+    <section id="framework" style="background: #131a24; padding: 64px 0;">
+      <div
+        class="container"
+        style="max-width: 1400px; margin: 0 auto; padding: 0 24px"
+      >
+        <h2
+          class="tech-stack-title"
+          style="
+            font-size: 3rem;
+            font-weight: 900;
+            color: #e2e5e8;
+            margin-top: 60px;
+            margin-bottom: 0.5rem;
+            text-align: center;
+          "
+        >
+          Complete Tech Stack.<br /><span class="blue" style="color: #00bbff"
+            >Zero Setup Time.</span
+          >
+        </h2>
+        <p
+          class="tech-stack-desc"
+          style="
+            color: #bfc9db;
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            text-align: center;
+          "
+        >
+          Our framework isn't just a template—it's a production-ready engine
+          containing everything modern enterprise applications need.
+        </p>
+        <div
+          class="tech-stack-grid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin: 48px auto 0 auto;
+            max-width: 1300px;
+          "
+        >
+          <div
+            class="tech-card"
+            style="
+              background: #020817;
+              border-radius: 18px;
+              padding: 32px 28px 28px 28px;
+              text-align: left;
+              box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+              min-height: 180px;
+            "
+          >
+            <div
+              class="tech-icon"
+              style="
+                background: #0a2233;
+                color: #00bbff;
+                font-size: 2rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                margin-bottom: 8px;
+                padding: 12px 16px;
+              "
+            >
+              &#128101;
+            </div>
+            <div
+              class="tech-title"
+              style="font-size: 1.25rem; font-weight: 700; color: #e2e5e8"
+            >
+              User Management
+            </div>
+            <div class="tech-desc" style="color: #bfc9db; font-size: 1rem">
+              Built-in roles, permissions, and profile management right out of
+              the box.
+            </div>
+          </div>
+          <div
+            class="tech-card"
+            style="
+              background: #020817;
+              border-radius: 18px;
+              padding: 32px 28px 28px 28px;
+              text-align: left;
+              box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+              min-height: 180px;
+            "
+          >
+            <div
+              class="tech-icon"
+              style="
+                background: #0a2233;
+                color: #00bbff;
+                font-size: 2rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                margin-bottom: 8px;
+                padding: 12px 16px;
+              "
+            >
+              &#128273;
+            </div>
+            <div
+              class="tech-title"
+              style="font-size: 1.25rem; font-weight: 700; color: #e2e5e8"
+            >
+              Quick SSO Config
+            </div>
+            <div class="tech-desc" style="color: #bfc9db; font-size: 1rem">
+              Enterprise-ready Single Sign-On integration with minimal setup.
+            </div>
+          </div>
+          <div
+            class="tech-card"
+            style="
+              background: #020817;
+              border-radius: 18px;
+              padding: 32px 28px 28px 28px;
+              text-align: left;
+              box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+              min-height: 180px;
+            "
+          >
+            <div
+              class="tech-icon"
+              style="
+                background: #0a2233;
+                color: #00bbff;
+                font-size: 2rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                margin-bottom: 8px;
+                padding: 12px 16px;
+              "
+            >
+              &#128230;
+            </div>
+            <div
+              class="tech-title"
+              style="font-size: 1.25rem; font-weight: 700; color: #e2e5e8"
+            >
+              Common UI Components
+            </div>
+            <div class="tech-desc" style="color: #bfc9db; font-size: 1rem">
+              Extensive library of pre-built, accessible React components.
+            </div>
+          </div>
+          <div
+            class="tech-card"
+            style="
+              background: #020817;
+              border-radius: 18px;
+              padding: 32px 28px 28px 28px;
+              text-align: left;
+              box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+              min-height: 180px;
+            "
+          >
+            <div
+              class="tech-icon"
+              style="
+                background: #0a2233;
+                color: #00bbff;
+                font-size: 2rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                margin-bottom: 8px;
+                padding: 12px 16px;
+              "
+            >
+              &#128196;
+            </div>
+            <div
+              class="tech-title"
+              style="font-size: 1.25rem; font-weight: 700; color: #e2e5e8"
+            >
+              Pattern Documentation
+            </div>
+            <div class="tech-desc" style="color: #bfc9db; font-size: 1rem">
+              Standardized architectural patterns for consistent development.
+            </div>
+          </div>
+          <div
+            class="tech-card"
+            style="
+              background: #020817;
+              border-radius: 18px;
+              padding: 32px 28px 28px 28px;
+              text-align: left;
+              box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+              min-height: 180px;
+            "
+          >
+            <div
+              class="tech-icon"
+              style="
+                background: #0a2233;
+                color: #00bbff;
+                font-size: 2rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                margin-bottom: 8px;
+                padding: 12px 16px;
+              "
+            >
+              &#129302;
+            </div>
+            <div
+              class="tech-title"
+              style="font-size: 1.25rem; font-weight: 700; color: #e2e5e8"
+            >
+              AI Prompt Integration
+            </div>
+            <div class="tech-desc" style="color: #bfc9db; font-size: 1rem">
+              Leverage AI to generate code using our proven patterns.
+            </div>
+          </div>
+          <div
+            class="tech-card"
+            style="
+              background: #020817;
+              border-radius: 18px;
+              padding: 32px 28px 28px 28px;
+              text-align: left;
+              box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+              min-height: 180px;
+            "
+          >
+            <div
+              class="tech-icon"
+              style="
+                background: #0a2233;
+                color: #00bbff;
+                font-size: 2rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                margin-bottom: 8px;
+                padding: 12px 16px;
+              "
+            >
+              &#9881;&#65039;
+            </div>
+            <div
+              class="tech-title"
+              style="font-size: 1.25rem; font-weight: 700; color: #e2e5e8"
+            >
+              Built-in CI/CD
+            </div>
+            <div class="tech-desc" style="color: #bfc9db; font-size: 1rem">
+              Automated deployment pipelines pre-configured for your workflow.
+            </div>
+          </div>
+          <div
+            class="tech-card"
+            style="
+              background: #020817;
+              border-radius: 18px;
+              padding: 32px 28px 28px 28px;
+              text-align: left;
+              box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+              min-height: 180px;
+            "
+          >
+            <div
+              class="tech-icon"
+              style="
+                background: #0a2233;
+                color: #00bbff;
+                font-size: 2rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                margin-bottom: 8px;
+                padding: 12px 16px;
+              "
+            >
+              &#9729;&#65039;
+            </div>
+            <div
+              class="tech-title"
+              style="font-size: 1.25rem; font-weight: 700; color: #e2e5e8"
+            >
+              AWS Infrastructure
+            </div>
+            <div class="tech-desc" style="color: #bfc9db; font-size: 1rem">
+              Infrastructure as Code (IaC) templates for rapid AWS provisioning.
+            </div>
+          </div>
+          <div
+            class="tech-card"
+            style="
+              background: #020817;
+              border-radius: 18px;
+              padding: 32px 28px 28px 28px;
+              text-align: left;
+              box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+              min-height: 180px;
+            "
+          >
+            <div
+              class="tech-icon"
+              style="
+                background: #0a2233;
+                color: #00bbff;
+                font-size: 2rem;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                margin-bottom: 8px;
+                padding: 12px 16px;
+              "
+            >
+              &#128295;
+            </div>
+            <div
+              class="tech-title"
+              style="font-size: 1.25rem; font-weight: 700; color: #e2e5e8"
+            >
+              Automated Testing
+            </div>
+            <div class="tech-desc" style="color: #bfc9db; font-size: 1rem">
+              Integrated testing framework ensuring reliability from day one.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Services Section -->
+    <section id="services" style="padding: 64px 0;">
+      
+      <div class="solutions-section">
+        <div class="solutions-left">
+          <div class="solutions-title">
+            We Don't Sell Tools.<br />
+            <span class="blue">We Deliver Solutions.</span>
+          </div>
+          <div class="solutions-desc">
+            Unlike traditional dev shops that start from scratch, or SaaS
+            platforms that lock you in, we offer the best of both worlds.
+          </div>
+          <ul class="solutions-list">
+            <li>
+              <span class="check">&#10003;</span> End-to-end delivery
+              responsibility
+            </li>
+            <li><span class="check">&#10003;</span> Source code ownership</li>
+            <li>
+              <span class="check">&#10003;</span> 50% faster time-to-market
+            </li>
+            <li>
+              <span class="check">&#10003;</span> Enterprise-grade architecture
+              day one
+            </li>
+          </ul>
+          <button class="solutions-btn">Build With Us</button>
+        </div>
+        <div class="solutions-right" style="width: 95%">
+          <div class="compare-card">
+            <div class="compare-title">Traditional Development</div>
+            <div class="compare-bar">
+              <div class="compare-bar-inner" style="width: 95%"></div>
+            </div>
+            <div class="compare-labels">
+              <span>6-12 Months</span>
+              <span>High Risk</span>
+            </div>
+          </div>
+          <div class="compare-card rad">
+            <div class="compare-title" style="color: #00bbff">
+              With RAD Framework
+            </div>
+            <div class="compare-bar">
+              <div class="compare-bar-inner rad" style="width: 45%"></div>
+            </div>
+            <div class="compare-labels">
+              <span><strong>3-6 Months</strong></span>
+              <span style="color: #00bbff"><strong>50% Faster</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Case Studies Section (moved to end) -->
+    <section id="case-studies" style="padding: 64px 0;">
+      <div
+        class="impact-section"
+        style="max-width: 1600px; margin: 0 auto; padding: 64px 24px 0 24px"
+      >
+        <div
+          class="impact-title"
+          style="
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 48px;
+            color: #e2e5e8;
+          "
+        >
+          Proven Impact
+        </div>
+        <div
+          class="impact-grid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 48px;
+          "
+        >
+          <div
+            class="impact-card"
+            style="
+              background: #080e1e;
+              border-radius: 24px;
+              padding: 48px 40px 40px 40px;
+              position: relative;
+              box-shadow: 0 2px 24px 0 rgba(0, 0, 0, 0.1);
+              min-height: 320px;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+            "
+          >
+            <div
+              class="card-top"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 18px;
+              "
+            >
+              <span
+                class="card-label"
+                style="
+                  background: #232b3a;
+                  color: #e2e5e8;
+                  font-size: 0.95rem;
+                  font-weight: 500;
+                  border-radius: 10px;
+                  padding: 6px 18px;
+                  display: inline-block;
+                "
+                >PropTech</span
+              >
+              <a
+                class="card-link"
+                href="#"
+                title="View Details"
+                style="
+                  background: none;
+                  border: 2px solid #232b3a;
+                  border-radius: 50%;
+                  width: 40px;
+                  height: 40px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #bfc9db;
+                  font-size: 1.3rem;
+                  cursor: pointer;
+                  transition: border 0.2s, color 0.2s;
+                "
+                ><span style="font-size: 1.3rem">&#8599;</span></a
+              >
+            </div>
+            <div
+              class="card-title"
+              style="
+                font-size: 2rem;
+                font-weight: 900;
+                margin-bottom: 18px;
+                color: #e2e5e8;
+              "
+            >
+              Rent Manager
+            </div>
+            <div
+              class="card-desc"
+              style="color: #bfc9db; font-size: 1.15rem; margin-bottom: 32px"
+            >
+              Comprehensive application for property owners to manage tenants
+              and automate rent collection workflows.
+            </div>
+            <span
+              class="card-tag"
+              style="
+                background: #032d44;
+                color: #00bbff;
+                font-size: 1rem;
+                font-weight: 500;
+                border-radius: 8px;
+                padding: 8px 22px;
+                display: inline-block;
+              "
+              >End-to-End Automation</span
+            >
+          </div>
+          <div
+            class="impact-card"
+            style="
+              background: #080e1e;
+              border-radius: 24px;
+              padding: 48px 40px 40px 40px;
+              position: relative;
+              box-shadow: 0 2px 24px 0 rgba(0, 0, 0, 0.1);
+              min-height: 320px;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+            "
+          >
+            <div
+              class="card-top"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 18px;
+              "
+            >
+              <span
+                class="card-label"
+                style="
+                  background: #232b3a;
+                  color: #e2e5e8;
+                  font-size: 0.95rem;
+                  font-weight: 500;
+                  border-radius: 10px;
+                  padding: 6px 18px;
+                  display: inline-block;
+                "
+                >InsurTech</span
+              >
+              <a
+                class="card-link"
+                href="#"
+                title="View Details"
+                style="
+                  background: none;
+                  border: 2px solid #232b3a;
+                  border-radius: 50%;
+                  width: 40px;
+                  height: 40px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #bfc9db;
+                  font-size: 1.3rem;
+                  cursor: pointer;
+                  transition: border 0.2s, color 0.2s;
+                "
+                ><span style="font-size: 1.3rem">&#8599;</span></a
+              >
+            </div>
+            <div
+              class="card-title"
+              style="
+                font-size: 2rem;
+                font-weight: 900;
+                margin-bottom: 18px;
+                color: #e2e5e8;
+              "
+            >
+              Policy Checking App
+            </div>
+            <div
+              class="card-desc"
+              style="color: #bfc9db; font-size: 1.15rem; margin-bottom: 32px"
+            >
+              Insurance backoffice tool to compare policy documents and generate
+              comparison reports automatically.
+            </div>
+            <span
+              class="card-tag"
+              style="
+                background: #032d44;
+                color: #00bbff;
+                font-size: 1rem;
+                font-weight: 500;
+                border-radius: 8px;
+                padding: 8px 22px;
+                display: inline-block;
+              "
+              >99% Time Reduction</span
+            >
+          </div>
+        </div>
+      </div>
+    </section >
+    <!-- Contact Section -->
+      <section id="contact" style="background: #131a24; padding: 64px 0;">
+        <div class="container" style="max-width: 700px; margin: 0 auto; padding: 60px 20px 0 20px; display: flex; flex-direction: column; align-items: center;">
+          <h1 style="font-size: 2.8rem; font-weight: 700; margin-bottom: 0.2em; text-align: center;">Start Your<br>Transformation</h1>
+          <div class="subtitle" style="color: #bfc9db; font-size: 1.1rem; margin-bottom: 2.5em; text-align: center;">Ready to build 50% faster? Tell us about your project.</div>
+          <form style="width: 100%; display: flex; flex-direction: column; gap: 1.2em;">
+            <div class="row" style="display: flex; gap: 1em;">
+              <div class="form-group" style="flex: 1; display: flex; flex-direction: column;">
+                <label for="name" style="font-size: 1rem; font-weight: 600; margin-bottom: 0.4em; color: #bfc9db;">Name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" autocomplete="name" style="background: #232a36; border: none; border-radius: 6px; padding: 0.9em 1em; color: #fff; font-size: 1rem; font-family: inherit; margin-bottom: 0.2em; transition: box-shadow 0.2s;">
+              </div>
+              <div class="form-group" style="flex: 1; display: flex; flex-direction: column;">
+                <label for="email" style="font-size: 1rem; font-weight: 600; margin-bottom: 0.4em; color: #bfc9db;">Email</label>
+                <input type="email" id="email" name="email" placeholder="john@company.com" autocomplete="email" style="background: #232a36; border: none; border-radius: 6px; padding: 0.9em 1em; color: #fff; font-size: 1rem; font-family: inherit; margin-bottom: 0.2em; transition: box-shadow 0.2s;">
+              </div>
+            </div>
+            <div class="form-group" style="display: flex; flex-direction: column;">
+              <label for="message" style="font-size: 1rem; font-weight: 600; margin-bottom: 0.4em; color: #bfc9db;">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your project..." style="background: #232a36; border: none; border-radius: 6px; padding: 0.9em 1em; color: #fff; font-size: 1rem; font-family: inherit; margin-bottom: 0.2em; transition: box-shadow 0.2s; min-height: 110px; resize: vertical;"></textarea>
+            </div>
+            <button type="submit" class="submit-btn" style="background: #1ec3ff; color: #181e27; font-weight: 600; font-size: 1.1rem; border: none; border-radius: 6px; padding: 0.9em 0; cursor: pointer; margin-top: 0.5em; transition: background 0.2s;">Send Inquiry</button>
+          </form>
+        </div>
+      </section>
+        <div style="flex:1 0 auto"></div>
+        <div class="footer" style="width: 100vw; text-align: center; padding: 36px 0 0px 0; font-size: 1.18rem; background: linear-gradient(90deg, #080e1e 60%, #0a2233 100%); font-family: 'Segoe UI', 'Arial', sans-serif; letter-spacing: 0.01em; flex-shrink: 0; border-top: 1.5px solid #00bbff44; color: #b6eaff; box-shadow: 0 -2px 24px 0 #00bbff11; backdrop-filter: blur(4px) saturate(120%);">
+          © 2026 Siddhatva Technologies. <span style="color:#00bbff; font-weight:600; letter-spacing:0.02em;">AI-Enhanced</span>
+        </div>
+        <!-- AI Assistant Floating Button -->
+        <button class="ai-assistant-btn" title="AI Assistant" aria-label="AI Assistant">
+          <span style="display:inline-block; font-size:2.2rem;">🤖</span>
+        </button>
+    <script>
+      // AI Assistant Button (future: open chat/modal)
+      document.querySelector('.ai-assistant-btn').addEventListener('click', function() {
+        alert('AI Assistant coming soon!');
+      });
+      // Scroll to #case-studies when 'View Case Studies' is clicked
+      document.getElementById('view-case-studies-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('case-studies').scrollIntoView({ behavior: 'smooth' });
+      });
+      // Scroll to #contact when 'Start Your Project' is clicked
+      document.getElementById('start-project-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+      });
+      // Scroll to top when logo is clicked
+      document.getElementById('logo-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      // Smooth scroll for Framework, Services, and Case Studies links
+      document.querySelectorAll(".navbar-menu a").forEach(function (link) {
+        if (link.textContent.trim().toLowerCase() === "framework") {
+          link.setAttribute("href", "#framework");
+        }
+        if (link.textContent.trim().toLowerCase() === "services") {
+          link.setAttribute("href", "#services");
+        }
+        if (link.textContent.trim().toLowerCase() === "case studies") {
+          link.setAttribute("href", "#case-studies");
+        }
+      });
+    </script>
+  </body>
+</html>
